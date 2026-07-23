@@ -390,7 +390,7 @@
   <main id="reviews">
     <div class="section-heading">
       <h2>Guest Experiences</h2>
-      <p>Each card links to the original public review. Google dates are shown as Google displayed them; five Google entries are rating-only.</p>
+      <p>Each card links to the original public review. Google reviews are positioned using the relative dates Google displayed; five Google entries are rating-only.</p>
     </div>
     <section class="review-grid" aria-label="Reviews">
       
@@ -1725,7 +1725,27 @@
       const search = document.querySelector('#review-search');
       const count = document.querySelector('#result-count');
       const empty = document.querySelector('#empty-state');
+      const reviewGrid = document.querySelector('.review-grid');
       let activeFilter = 'all';
+
+      const capturedAt = new Date(2026, 6, 21, 12);
+      const reviewTimestamp = (card) => {
+        const dateLabel = card.querySelector('.reviewer-details p').childNodes[0].textContent.trim();
+        if (card.dataset.source === 'yelp') return new Date(dateLabel + ' 12:00:00').getTime();
+
+        const approximateDate = new Date(capturedAt);
+        const monthMatch = dateLabel.match(/^(\d+) months? ago$/);
+        const yearMatch = dateLabel.match(/^(\d+) years? ago$/);
+        if (monthMatch) approximateDate.setMonth(approximateDate.getMonth() - Number(monthMatch[1]));
+        else if (dateLabel === 'a year ago') approximateDate.setFullYear(approximateDate.getFullYear() - 1);
+        else if (yearMatch) approximateDate.setFullYear(approximateDate.getFullYear() - Number(yearMatch[1]));
+        return approximateDate.getTime();
+      };
+
+      cards.sort((a, b) =>
+        reviewTimestamp(b) - reviewTimestamp(a) || Number(a.dataset.index) - Number(b.dataset.index)
+      );
+      for (const card of cards) reviewGrid.append(card);
 
       const update = () => {
         const query = search.value.trim().toLocaleLowerCase();
