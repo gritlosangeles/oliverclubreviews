@@ -1,0 +1,1757 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Public five-star reviews of Oliver Club Barber Shop from Google and Yelp.">
+  <meta name="theme-color" content="#142438">
+  <title>Oliver Club Review Archive</title>
+  <style>
+    :root {
+      --ink: #142438;
+      --ink-soft: #304258;
+      --paper: #f6f2e8;
+      --paper-deep: #eee6d5;
+      --white: #fffdfa;
+      --gold: #b89148;
+      --gold-soft: #dccba7;
+      --line: #d9d0be;
+      --muted: #68717b;
+      --google: #2457c5;
+      --yelp: #c83932;
+      --shadow: 0 12px 30px rgba(20, 36, 56, 0.08);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 12% 0%, rgba(184, 145, 72, 0.11), transparent 32rem),
+        var(--paper);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; }
+    button, input { font: inherit; }
+
+    .site-header {
+      padding: 5.5rem 1.25rem 3.75rem;
+      color: var(--white);
+      background: var(--ink);
+      border-bottom: 4px solid var(--gold);
+    }
+
+    .header-inner,
+    .controls-inner,
+    main,
+    .footer-inner {
+      width: min(1160px, 100%);
+      margin-inline: auto;
+    }
+
+    .eyebrow {
+      margin: 0 0 1rem;
+      color: var(--gold-soft);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      max-width: 820px;
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2.7rem, 7vw, 5.8rem);
+      font-weight: 500;
+      line-height: 0.98;
+      letter-spacing: -0.045em;
+    }
+
+    .intro {
+      max-width: 720px;
+      margin: 1.5rem 0 0;
+      color: #d8e0e7;
+      font-size: clamp(1rem, 2.2vw, 1.22rem);
+    }
+
+    .summary-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+      margin-top: 2.25rem;
+    }
+
+    .summary-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      padding: 0.65rem 0.9rem;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      border-radius: 999px;
+      color: var(--white);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: border-color 160ms ease, background 160ms ease;
+    }
+
+    .summary-link:hover,
+    .summary-link:focus-visible {
+      border-color: var(--gold-soft);
+      background: rgba(255, 255, 255, 0.07);
+    }
+
+    .controls {
+      position: sticky;
+      z-index: 20;
+      top: 0;
+      border-bottom: 1px solid var(--line);
+      background: rgba(246, 242, 232, 0.94);
+      backdrop-filter: blur(14px);
+    }
+
+    .controls-inner {
+      display: grid;
+      grid-template-columns: minmax(220px, 1fr) auto auto;
+      gap: 1rem;
+      align-items: center;
+      padding: 1rem 1.25rem;
+    }
+
+    .search-wrap { position: relative; }
+    .search-wrap span {
+      position: absolute;
+      top: 50%;
+      left: 0.95rem;
+      transform: translateY(-50%);
+      color: var(--muted);
+      pointer-events: none;
+    }
+
+    #review-search {
+      width: 100%;
+      min-height: 44px;
+      padding: 0.72rem 1rem 0.72rem 2.65rem;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      color: var(--ink);
+      background: var(--white);
+      outline: none;
+    }
+
+    #review-search:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(184, 145, 72, 0.2);
+    }
+
+    .filters {
+      display: flex;
+      gap: 0.45rem;
+    }
+
+    .filter-button {
+      min-height: 42px;
+      padding: 0.55rem 0.85rem;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--ink-soft);
+      background: transparent;
+      cursor: pointer;
+    }
+
+    .filter-button:hover,
+    .filter-button:focus-visible { border-color: var(--gold); }
+    .filter-button[aria-pressed="true"] {
+      color: var(--white);
+      border-color: var(--ink);
+      background: var(--ink);
+    }
+
+    #result-count {
+      min-width: 8.5rem;
+      color: var(--muted);
+      font-size: 0.9rem;
+      text-align: right;
+    }
+
+    main { padding: 3rem 1.25rem 5.5rem; }
+
+    .section-heading {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      align-items: end;
+      margin-bottom: 1.5rem;
+    }
+
+    .section-heading h2 {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 500;
+      letter-spacing: -0.03em;
+    }
+
+    .section-heading p {
+      max-width: 520px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.92rem;
+      text-align: right;
+    }
+
+    .review-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.1rem;
+      align-items: start;
+    }
+
+    .review-card {
+      min-width: 0;
+      padding: 1.5rem;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: var(--white);
+      box-shadow: var(--shadow);
+    }
+
+    .review-card[hidden] { display: none; }
+
+    .review-header {
+      display: grid;
+      grid-template-columns: 42px minmax(0, 1fr) auto;
+      gap: 0.8rem;
+      align-items: center;
+    }
+
+    .reviewer-mark {
+      display: grid;
+      width: 42px;
+      height: 42px;
+      place-items: center;
+      border: 1px solid var(--gold-soft);
+      border-radius: 50%;
+      color: var(--ink);
+      background: var(--paper-deep);
+      font-family: Georgia, "Times New Roman", serif;
+      font-weight: 700;
+    }
+
+    .reviewer-details { min-width: 0; }
+    .reviewer-details h2 {
+      overflow: hidden;
+      margin: 0;
+      font-size: 1rem;
+      line-height: 1.3;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .reviewer-details p {
+      margin: 0.18rem 0 0;
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+
+    .source-badge {
+      padding: 0.28rem 0.55rem;
+      border-radius: 999px;
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .source-badge.google { color: var(--google); background: #e9effd; }
+    .source-badge.yelp { color: var(--yelp); background: #fae9e8; }
+
+    .stars {
+      margin-top: 1rem;
+      color: var(--gold);
+      font-size: 1.08rem;
+      letter-spacing: 0.08em;
+    }
+
+    .review-text {
+      margin: 0.8rem 0 0;
+      color: var(--ink-soft);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.05rem;
+      line-height: 1.68;
+      overflow-wrap: anywhere;
+    }
+
+    .review-text.rating-only { color: var(--muted); font-style: italic; }
+
+    .review-footer {
+      margin-top: 1.25rem;
+      padding-top: 1rem;
+      border-top: 1px solid #e8e1d4;
+    }
+
+    .review-footer a {
+      color: var(--ink);
+      font-size: 0.86rem;
+      font-weight: 750;
+      text-decoration: none;
+    }
+
+    .review-footer a:hover,
+    .review-footer a:focus-visible { color: var(--gold); text-decoration: underline; }
+
+    .empty-state {
+      display: none;
+      padding: 4rem 1rem;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .empty-state.visible { display: block; }
+
+    .site-footer {
+      padding: 2.5rem 1.25rem;
+      color: #cbd4dd;
+      background: var(--ink);
+    }
+
+    .footer-inner {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 1.5rem;
+      align-items: start;
+    }
+
+    .site-footer p { max-width: 760px; margin: 0; font-size: 0.82rem; }
+    .site-footer a { color: var(--gold-soft); }
+
+    @media (max-width: 820px) {
+      .site-header { padding-top: 4.2rem; }
+      .controls { position: static; }
+      .controls-inner { grid-template-columns: 1fr; }
+      #result-count { min-width: 0; text-align: left; }
+      .section-heading { display: block; }
+      .section-heading p { margin-top: 0.5rem; text-align: left; }
+      .review-grid { grid-template-columns: 1fr; }
+      .footer-inner { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 480px) {
+      .site-header { padding-inline: 1rem; }
+      main { padding-inline: 1rem; }
+      .controls-inner { padding-inline: 1rem; }
+      .filters { display: grid; grid-template-columns: repeat(3, 1fr); }
+      .filter-button { padding-inline: 0.55rem; }
+      .review-card { padding: 1.2rem; border-radius: 13px; }
+      .review-header { grid-template-columns: 38px minmax(0, 1fr); }
+      .reviewer-mark { width: 38px; height: 38px; }
+      .source-badge { grid-column: 2; justify-self: start; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <p class="eyebrow">Oliver Club Barber Shop</p>
+      <h1>The Review Archive</h1>
+      <p class="intro">Seventy-three public five-star reviews from guests on Google and Yelp, collected in one clean, searchable place.</p>
+      <div class="summary-row" aria-label="Review sources">
+        <a class="summary-link" href="https://www.google.com/maps/place/Oliver+Club+Barber+Shop+(Grit+Los+Angeles)/data=!4m2!3m1!1s0x0:0x69f5f867769ef245" target="_blank" rel="noopener noreferrer">19 Google reviews <span aria-hidden="true">↗</span></a>
+        <a class="summary-link" href="https://www.yelp.com/biz/oliver-club-barber-shop-los-angeles-2" target="_blank" rel="noopener noreferrer">54 Yelp reviews <span aria-hidden="true">↗</span></a>
+      </div>
+    </div>
+  </header>
+
+  <section class="controls" aria-label="Review controls">
+    <div class="controls-inner">
+      <label class="search-wrap">
+        <span aria-hidden="true">⌕</span>
+        <input id="review-search" type="search" placeholder="Search reviews or reviewer names" autocomplete="off" aria-label="Search reviews">
+      </label>
+      <div class="filters" role="group" aria-label="Filter by source">
+        <button class="filter-button" type="button" data-filter="all" aria-pressed="true">All</button>
+        <button class="filter-button" type="button" data-filter="google" aria-pressed="false">Google</button>
+        <button class="filter-button" type="button" data-filter="yelp" aria-pressed="false">Yelp</button>
+      </div>
+      <div id="result-count" aria-live="polite">73 reviews</div>
+    </div>
+  </section>
+
+  <main id="reviews">
+    <div class="section-heading">
+      <h2>Guest experiences</h2>
+      <p>Each card links to the original public review. Google dates are shown as Google displayed them; five Google entries are rating-only.</p>
+    </div>
+    <section class="review-grid" aria-label="Reviews">
+      
+    <article class="review-card" data-source="yelp" data-index="0">
+      <header class="review-header">
+        <div class="reviewer-mark" aria-hidden="true">FV</div>
+        <div class="reviewer-details">
+          <h2>Fernie V.</h2>
+          <p>Sep 2, 2025<span aria-hidden="true"> · </span>Yelp</p>
+        </div>
+        <span class="source-badge yelp">Yelp</span>
+      </header>
+      <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <p class="review-text">Went in after a recommendation from a friend. Grayson took great care of me. He was efficient and friendly. He gave me great tips on how to keep my hair looking it&#039;s best between cuts!</p>
+      <footer class="review-footer">
+        <a href="https://www.yelp.com/biz/oliver-club-barber-shop-los-angeles-2?hrid=u2KN3l0iugHMPxx8dqrZ-A" target="_blank" rel="noopener noreferrer" aria-label="View Fernie V.'s review on Yelp">
+          View original on Yelp <span aria-hidden="true">↗</span>
+        </a>
+      </footer>
+    </article>
+
+    <article class="review-card" data-source="yelp" data-index="1">
+      <header class="review-header">
+        <div class="reviewer-mark" aria-hidden="true">MJ</div>
+        <div class="reviewer-details">
+          <h2>Michael J.</h2>
+          <p>Jun 1, 2025<span aria-hidden="true"> · </span>Yelp</p>
+        </div>
+        <span class="source-badge yelp">Yelp</span>
+      </header>
+      <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <p class="review-text">I&#039;ve been seeing Jon for my haircuts for almost 6 years now. Every single time, his cuts have been perfect and exactly what I&#039;ve asked for, if not better. He&#039;ll be honest with you and if you like fades/tapers, no one does it better. Could not recommend him more, especially if you have Asian texture hair. Stop thinking about it and just book!</p>
+      <footer class="review-footer">
+        <a href="https://www.yelp.com/biz/oliver-club-barber-shop-los-angeles-2?hrid=_Hqv9kl96L8KwlEeo9-mog" target="_blank" rel="noopener noreferrer" aria-label="View Michael J.'s review on Yelp">
+          View original on Yelp <span aria-hidden="true">↗</span>
+        </a>
+      </footer>
+    </article>
+
+    <article class="review-card" data-source="yelp" data-index="2">
+      <header class="review-header">
+        <div class="reviewer-mark" aria-hidden="true">KJ</div>
+        <div class="reviewer-details">
+          <h2>Kathleen J.</h2>
+          <p>Sep 10, 2024<span aria-hidden="true"> · </span>Yelp</p>
+        </div>
+        <span class="source-badge yelp">Yelp</span>
+      </header>
+      <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <p class="review-text">I went in with my husband while he got a cut and a shave. This shop is the best!<br>It is clean, great aesthetic and has a comfortable vibe.<br>Grayson did a great job, I would highly recommend him.</p>
+      <footer class="review-footer">
+        <a href="https://www.yelp.com/biz/oliver-club-barber-shop-los-angeles-2?hrid=iZOpwoDqwqc4mNdeTFXaiQ" target="_blank" rel="noopener noreferrer" aria-label="View Kathleen J.'s review on Yelp">
+          View original on Yelp <span aria-hidden="true">↗</span>
+        </a>
+      </footer>
+    </article>
+
+    <article class="review-card" data-source="yelp" data-index="3">
+      <header class="review-header">
+        <div class="reviewer-mark" aria-hidden="true">CC</div>
+        <div class="reviewer-details">
+          <h2>Cameron C.</h2>
+          <p>Aug 20, 2024<span aria-hidden="true"> · </span>Yelp</p>
+        </div>
+        <span class="source-badge yelp">Yelp</span>
+      </header>
+      <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <p class="review-text">Never before have I experienced a barber with the level of skill and attention to detail that Jon shows. Even asking for a pretty normal haircut, Jon made sure every detail looked perfect from every angle. Add to that the clean, relaxing space and I&#039;m definitely going to be coming back whenever my hair needs it.</p>
+      <footer class="review-footer">
+        <a href="https://www.yelp.com/biz/oliver-club-barber-shop-los-angeles-2?hrid=QKKtS80zXrfexTvbsM1YeQ" target="_blank" rel="noopener noreferrer" aria-label="View Cameron C.'s review on Yelp">
+          View original on Yelp <span aria-hidden="true">↗</span>
+        </a>
+      </footer>
+    </article>
+
+    <article class="review-card" data-source="yelp" data-index="4">
+      <header class="review-header">
+        <div class="reviewer-mark" aria-hidden="true">CW</div>
+        <div class="reviewer-details">
+          <h2>Chloewiecz W.</h2>
+          <p>Mar 9, 2024<span aria-hidden="true"> · </span>Yelp</p>
+        </div>
+        <span class="source-badge yelp">Yelp</span>
+      </header>
+      <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <p class="review-text">The best barber I&#039;ve ever had!<br>Most barbers I&#039;ve gone to know how to get my sides right but can never do the top of my hair justice like a hairstylist would. Jon is extremely versatile and knows how to give you a topnotch fade while also using shears to give your length on top life! He is the perfect blend of barber &amp; stylist. Also the vibe of the shop is super cool. KTLA or basketball on the TV, just how I like it. ;)</p>
+      <footer class="review-footer">
+        <a href="https://www.yelp.com/biz/oliver-club-barber-shop-los-angeles-2?hrid=ZbtVmaV-sByQkWqFR4PGIw" target="_blank" rel="noopener noreferrer" aria-label="View Chloewiecz W.'s review on Yelp">
+          View original on Yelp <span aria-hidden="true">↗</span>
+        </a>
+      </footer>
+    </article>
+
+    <article class="review-card" data-source="yelp" data-index="5">
+      <header class="review-header">
+        <div class="reviewer-mark" aria-hidden="true">SV</div>
+        <div class="reviewer-details">
+          <h2>Sal V.</h2>
+          <p>Jan 8, 2024<span aria-hidden="true"> · </span>Yelp</p>
+        </div>
+        <span class="source-badge yelp">Yelp</span>
+      </header>
+      <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <p class="review-text">By far the best barbershop in downtown LA (Arts District).<br><br>Pros: cool ambiance. Great cuts delivered every time. Great prices for the quality of the cut.<br>Cons: Far to me now since I moved. LoL But still worth the drive.<br><br>Conclusion: Jon is a dope barber. His spot is clean and makes it a great experience too.</p>
+      <footer class="review-footer">
+        <a href="https://www.yelp.com/biz/oliver-club-barber-shop-los-angeles-2?hrid=XuuDFYhyW6M3tg3LSmfNvQ" target="_blank" rel="noopener noreferrer" aria-label="View Sal V.'s review on Yelp">
+          View original on Yelp <span aria-hidden="true">↗</span>
+        </a>
+      </footer>
+    </article>
+
+    <article class="review-card" data-source="yelp" data-index="6">
+      <header class="review-header">
+        <div class="reviewer-mark" aria-hidden="true">BL</div>
+        <div class="reviewer-details">
+          <h2>Bryan L.</h2>
+          <p>Oct 27, 2023<span aria-hidden="true"> · </span>Yelp</p>
+        </div>
+        <span class="source-badge yelp">Yelp</span>
+      </header>
+      <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <p class="review-text">John is very attentive and on point with great attention to detail. Haircut, taper, beard and lineup . It&#039;s hard to find a solid barber, glad I found these guys. Highly recommend checking them out.</p>
+      <footer class="review-footer">
+        <a href="https://www.yelp.com/biz/oliver-club-barber-shop-los-angeles-2?hrid=6Sky8d3NpgS66rXiHjso9w" target="_blank" rel="noopener noreferrer" aria-label="View Bryan L.'s review on Yelp">
+          View original on Yelp <span aria-hidden="true">↗</span>
+        </a>
+      </footer>
+    </article>
+
+    <article class="review-card" data-source="yelp" data-index="7">
+      <header class="review-header">
+        <div class="reviewer-mark" aria-hidden="true">RM</div>
+        <div class="reviewer-details">
+          <h2>Randall M.</h2>
+          <p>May 5, 2023<span aria-hidden="true"> · </span>Yelp</p>
+        </div>
+        <span class="source-badge yelp">Yelp</span>
+      </header>
+      <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <p class="review-text">My dude Jon. Been going to him for 8 years. I pay the premium because he provides premium results.<br><br>I know he does all kinds of fades and all kinds of hair. Always making me look fresh for the next event.<br><br>Low key we bull shit every sesh and just talk about life. Always looking forward to my next cut.</p>
+      <footer class="review-footer">
+        <a href="https://www.yelp.com/biz/oliver-club-barber-shop-los-angeles-2?hrid=QwO9DQNTkMxmMf-PYpUcuw" target="_blank" rel="noopener noreferrer" aria-label="View Randall M.'s review on Yelp">
+          View original on Yelp <span aria-hidden="true">↗</span>
+        </a>
+      </footer>
+    </article>
+
+    <article class="review-card" data-source="yelp" data-index="8">
+      <header class="review-header">
+        <div class="reviewer-mark" aria-hidden="true">ED</div>
+        <div class="reviewer-details">
+          <h2>Enrico D.</h2>
+          <p>Apr 21, 2022<span aria-hidden="true"> · </span>Yelp</p>
+        </div>
+        <span class="source-badge yelp">Yelp</span>
+      </header>
+      <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <p class="review-text">I&#039;ve been looking for the right barber ever since moving to LA and I&#039;m glad that I came to Grit first. Jon gave me my cut exactly the way I wanted. He really takes his time to make sure that he provides a flawless haircut. I came with high expectations and left pleased. This is the place to come to if you want an amazing cut. He will definitely be my barber from now on. Thanks Jon, see you next time!</p>
+      <footer class="review-footer">
+        <a href="https://www.yelp.com/biz/oliver-club-barber-shop-los-angeles-2?hrid=X_xuZVUkJ3uNdvyg7uljYg" target="_blank" rel="noopener noreferrer" aria-label="View Enrico D.'s review on Yelp">
+          View original on Yelp <span aria-hidden="true">↗</span>
+        </a>
+      </footer>
+    </article>
+
+    <article class="review-card" data-source="yelp" data-index="9">
+      <header class="review-header">
+        <div class="reviewer-mark" aria-hidden="true">KK</div>
+        <div class="reviewer-details">
+          <h2>Kenneth K.</h2>
+          <p>Oct 9, 2021<span aria-hidden="true"> · </span>Yelp</p>
+        </div>
+        <span class="source-badge yelp">Yelp</span>
+      </header>
+      <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <p class="review-text">Best haircut of my life. Love the vibe and experience. Jon has mad skills and super chill. Will definitely be returning.</p>
+      <footer class="review-footer">
+        <a href="https://www.yelp.com/biz/oliver-club-barber-shop-los-angeles-2?hrid=WlzTwol2f3P3GV8VRP_84g" target="_blank" rel="noopener noreferrer" aria-label="View Kenneth K.'s review on Yelp">
+          View original on Yelp <span aria-hidden="true">↗</span>
+        </a>
+      </footer>
+    </article>
+
+    <article class="review-card" data-source="yelp" data-index="10">
+      <header class="review-header">
+        <div class="reviewer-mark" aria-hidden="true">CT</div>
+        <div class="reviewer-details">
+          <h2>Cody T.</h2>
+          <p>Oct 4, 2021<span aria-hidden="true"> · </span>Yelp</p>
+        </div>
+        <span class="source-badge yelp">Yelp</span>
+      </header>
+      <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <p class="review-text">Just a master at his craft this man. Super chill dude, great shop, and over all a great experience. Becoming a regular here.</p>
+      <footer class="review-footer">
+        <a href="https://www.yelp.com/biz/oliver-club-barber-shop-los-angeles-2?hrid=_ADEWRJdshnjP_wfQp-3mA" target="_blank" rel="noopener noreferrer" aria-label="View Cody T.'s review on Yelp">
+          View original on Yelp <span aria-hidden="true">↗</span>
+        </a>
+      </footer>
+    </article>
+
+    <article class="review-card" data-source="yelp" data-index="11">
+      <header class="review-header">
+        <div class="reviewer-mark" aria-hidden="true">AR</div>
+        <div class="reviewer-details">
+          <h2>Angel R.</h2>
+          <p>Jun 23, 2021<span aria-hidden="true"> · </span>Yelp</p>
+        </div>
+        <span class="source-badge yelp">Yelp</span>
+      </header>
+      <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <p class="review-text">Jon is a super cool guy who happens to be an AMAZING barber.<br><br>As a dude, you always are super skeptical when trying out a new barber, but I am so glad I went with Jon.<br><br>He gave me the exact cut that I envisioned in my head, which is very hard to do.<br><br>I&#039;ve finally found a great barber in the Arts District - book with Jon and you will too ;)</p>
+      <footer class="review-footer">
+        <a href="https://www.yelp.com/biz/oliver-club-barber-shop-los-angeles-2?hrid=y6CSGJOx2YSJMiU8OK4Cbw" target="_blank" rel="noopener noreferrer" aria-label="View Angel R.'s review on Yelp">
+          View original on Yelp <span aria-hidden="true">↗</span>
+        </a>
+      </footer>
+    </article>
+
+    <article class="review-card" data-source="yelp" data-index="12">
+      <header class="review-header">
+        <div class="reviewer-mark" aria-hidden="true">TH</div>
+        <div class="reviewer-details">
+          <h2>Theononymous H.</h2>
+          <p>Jan 4, 2021<span aria-hidden="true"> · </span>Yelp</p>
+        </div>
+        <span class="source-badge yelp">Yelp</span>
+      </header>
+      <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <p class="review-text">Jon was on point with everything. His studio was extremely clean and my fade was flawless. He&#039;s professional with everything from the communication to the presentation. Coming back for sure. Thanks!</p>
+      <footer class="review-footer">
+        <a href="https://www.yelp.com/biz/oliver-club-barber-shop-los-angeles-2?hrid=xkmNIIxjJTyJkRe2AzVziA" target="_blank" rel="noopener noreferrer" aria-label="View Theononymous H.'s review on Yelp">
+          View original on Yelp <span aria-hidden="true">↗</span>
+        </a>
+      </footer>
+    </article>
+
+    <article class="review-card" data-source="yelp" data-index="13">
+      <header class="review-header">
+        <div class="reviewer-mark" aria-hidden="true">AG</div>
+        <div class="reviewer-details">
+          <h2>Angel G.</h2>
+          <p>Sep 15, 2020<span aria-hidden="true"> · </span>Yelp</p>
+        </div>
+        <span class="source-badge yelp">Yelp</span>
+      </header>
+      <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <p class="review-text">Jon is excellent, the shop is actually in his cool downtown loft, it is very clean and well kept. He always takes the time to understand your requests and executes. I recommend Jon as a barber for anyone around the Arts District.</p>
+      <footer class="review-footer">
+        <a href="https://www.yelp.com/biz/oliver-club-barber-shop-los-angeles-2?hrid=AI2_cn55GxNfK357xy_IWA" target="_blank" rel="noopener noreferrer" aria-label="View Angel G.'s review on Yelp">
+          View original on Yelp <span aria-hidden="true">↗</span>
+        </a>
+      </footer>
+    </article>
+
+    <article class="review-card" data-source="yelp" data-index="14">
+      <header class="review-header">
+        <div class="reviewer-mark" aria-hidden="true">SD</div>
+        <div class="reviewer-details">
+          <h2>Sam D.</h2>
+          <p>Oct 9, 2019<span aria-hidden="true"> · </span>Yelp</p>
+        </div>
+        <span class="source-badge yelp">Yelp</span>
+      </header>
+      <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <p class="review-text">Jon anticipated my appointment with a text that gave instructions on making it to his front door. Super easy to find and everything. He offered me a beer when I came in, was super chill, cool dude and he gave me a great hair cut! Definitely knows what he&#039;s doing. Quality haircut, customer service, solid deal. Would highly recommend</p>
+      <footer class="review-footer">
+        <a href="https://www.yelp.com/biz/oliver-club-barber-shop-los-angeles-2?hrid=Tuqs52X7w2qJRGmGCKLsFA" target="_blank" rel="noopener noreferrer" aria-label="View Sam D.'s review on Yelp">
+          View original on Yelp <span aria-hidden="true">↗</span>
+        </a>
+      </footer>
+    </article>
+
+    <article class="review-card" data-source="yelp" data-index="15">
+      <header class="review-header">
+        <div class="reviewer-mark" aria-hidden="true">UK</div>
+        <div class="reviewer-details">
+          <h2>Umar K.</h2>
+          <p>Oct 4, 2019<span aria-hidden="true"> · </span>Yelp</p>
+        </div>
+        <span class="source-badge yelp">Yelp</span>
+      </header>
+      <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <p class="review-text">I found Grit just looking for barbers on Yelp located in DTLA and have stuck with Jon since. First off I just moved here from Nor Cal and haven&#039;t had a good experience looking for a new barber. After a few bad experiences I was glad to have found Jon and his dope spot. He takes his time cutting and is very chill always does his best to make sure your cut is on point. Very humble guy and makes the experience very welcoming. I was very scared/nervous after being let down by local barbers in Downtown LA after my first visit he earned me as a loyal customer and will always look to Jon anytime I need a cut in DTLA. Give him a shot and you won&#039;t be let down.</p>
+      <footer class="review-footer">
+        <a href="https://www.yelp.com/biz/oliver-club-barber-shop-los-angeles-2?hrid=YWRkEbuW2FxlhlG-pebTJw" target="_blank" rel="noopener noreferrer" aria-label="View Umar K.'s review on Yelp">
+          View original on Yelp <span aria-hidden="true">↗</span>
+        </a>
+      </footer>
+    </article>
+
+    <article class="review-card" data-source="yelp" data-index="16">
+      <header class="review-header">
+        <div class="reviewer-mark" aria-hidden="true">DP</div>
+        <div class="reviewer-details">
+          <h2>Dayana P.</h2>
+          <p>Sep 20, 2019<span aria-hidden="true"> · </span>Yelp</p>
+        </div>
+        <span class="source-badge yelp">Yelp</span>
+      </header>
+      <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <p class="review-text">Jon is excellent. As other reviewers mentioned, he takes the time to understand what you&#039;re looking for in a haircut and is meticulous in his process. I was very satisfied with the cut and the experience (the hot towels/oils were a welcomed plus). Highly recommend him if you&#039;re on the fence. It was an absolute delight to be in his chair.</p>
+      <footer class="review-footer">
+        <a href="https://www.yelp.com/biz/oliver-club-barber-shop-los-angeles-2?hrid=ReRZVzSlLm1It3Vxqm1VVw" target="_blank" rel="noopener noreferrer" aria-label="View Dayana P.'s review on Yelp">
+          View original on Yelp <span aria-hidden="true">↗</span>
+        </a>
+      </footer>
+    </article>
+
+    <article class="review-card" data-source="yelp" data-index="17">
+      <header class="review-header">
+        <div class="reviewer-mark" aria-hidden="true">LH</div>
+        <div class="reviewer-details">
+          <h2>Larry H.</h2>
+          <p>Sep 18, 2019<span aria-hidden="true"> · </span>Yelp</p>
+        </div>
+        <span class="source-badge yelp">Yelp</span>
+      </header>
+      <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <p class="review-text">This place is great! Jonn is a really chill barber with a lot of experience knowing how to work with the client. I&#039;ve been going to him probably for about a year now after having gone to a Korean salon (hard to find people who know how to cut Asian hair y&#039;know?) I was told that my hair doesn&#039;t do well with short cuts or fades, but that&#039;s clearly not the case after coming here.<br><br>The easy online scheduling; the hot towel, shave, and styling service; and simple card payment is all a winning situation. Great guy, easy conversation, and overall ambient vibe makes this place my go to always.</p>
+      <footer class="review-footer">
+        <a href="https://www.yelp.com/biz/oliver-club-barber-shop-los-angeles-2?hrid=ei5ln_1rwpeo3pZS7UeYXA" target="_blank" rel="noopener noreferrer" aria-label="View Larry H.'s review on Yelp">
+          View original on Yelp <span aria-hidden="true">↗</span>
+        </a>
+      </footer>
+    </article>
+
+    <article class="review-card" data-source="yelp" data-index="18">
+      <header class="review-header">
+        <div class="reviewer-mark" aria-hidden="true">AF</div>
+        <div class="reviewer-details">
+          <h2>Andreea F.</h2>
+          <p>May 1, 2019<span aria-hidden="true"> · </span>Yelp</p>
+        </div>
+        <span class="source-badge yelp">Yelp</span>
+      </header>
+      <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <p class="review-text">My boyfriend absolutely loves getting his hair cut by Jon! It goes without saying that I do too! We live in the ​Art District so his Barker Block location is perfect! Jon&#039;s attention to detail is spot on! I highly recommend all hair types (thick hair, thin hair, long, short or faded) give him a try - I say that because my boyfriend doesn&#039;t get fades although I see he&#039;s really great w/ them. It&#039;s a really nice feeling knowing you can count on consistently awesome hair!</p>
+      <footer class="review-footer">
+        <a href="https://www.yelp.com/biz/oliver-club-barber-shop-los-angeles-2?hrid=wNRZ76iTqFVm0uan8xkqTg" target="_blank" rel="noopener noreferrer" aria-label="View Andreea F.'s review on Yelp">
+          View original on Yelp <span aria-hidden="true">↗</span>
+        </a>
+      </footer>
+    </article>
+
+    <article class="review-card" data-source="yelp" data-index="19">
+      <header class="review-header">
+        <div class="reviewer-mark" aria-hidden="true">AK</div>
+        <div class="reviewer-details">
+          <h2>Arnold K.</h2>
+          <p>Mar 11, 2019<span aria-hidden="true"> · </span>Yelp</p>
+        </div>
+        <span class="source-badge yelp">Yelp</span>
+      </header>
+      <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <p class="review-text">Jon is a great guy, and an even better barber. He takes the time to hear you out to make sure you&#039;re satisfied with the cut. Parking can be a little bit of an issue, but you shouldn&#039;t have a problem most of the time. He even offers a complimentary beer once you get settled!<br><br>Only gripe with Jon has nothing to do with his profession, he&#039;s a Clippers fan...<br><br>All jokes aside, if you want a great haircut from a cool dude, try GRIT.</p>
+      <footer class="review-footer">
+        <a href="https://www.yelp.com/biz/oliver-club-barber-shop-los-angeles-2?hrid=jH67d4EpquZnPpISd_rmiA" target="_blank" rel="noopener noreferrer" aria-label="View Arnold K.'s review on Yelp">
+          View original on Yelp <span aria-hidden="true">↗</span>
+        </a>
+      </footer>
+    </article>
+
+    <article class="review-card" data-source="yelp" data-index="20">
+      <header class="review-header">
+        <div class="reviewer-mark" aria-hidden="true">DC</div>
+        <div class="reviewer-details">
+          <h2>Donald C.</h2>
+          <p>Dec 30, 2018<span aria-hidden="true"> · </span>Yelp</p>
+        </div>
+        <span class="source-badge yelp">Yelp</span>
+      </header>
+      <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <p class="review-text">Best haircut in a very long time!! I apologize for not writing this review sooner because what I have on my head is one of the best (if not the best) haircuts I&#039;ve ever had...and it&#039;s been a month!! It has held its shape! My wife continues to say how great my hair looks (it is extremely important to keep the wifey happy), and it&#039;s easy to manage. Just wash comb and go!! Jon is a true professional with an eye for detail. His shop is clean neat &amp; tidy. I scheduled the appointment online!! How cool is that?? Jon even offered me a beer!! Next time I&#039;ll take him up on that one. If you want to look good, look smart and keep your Lady/ies happy (I have one, only one!!) then Jon is your go-to hair man!! Thanks Jon! You&#039;re awesome!! And my hair still looks great!!</p>
+      <footer class="review-footer">
+        <a href="https://www.yelp.com/biz/oliver-club-barber-shop-los-angeles-2?hrid=YWoljf3ah9BqMYsjqao_uA" target="_blank" rel="noopener noreferrer" aria-label="View Donald C.'s review on Yelp">
+          View original on Yelp <span aria-hidden="true">↗</span>
+        </a>
+      </footer>
+    </article>
+
+    <article class="review-card" data-source="yelp" data-index="21">
+      <header class="review-header">
+        <div class="reviewer-mark" aria-hidden="true">HC</div>
+        <div class="reviewer-details">
+          <h2>Henry C.</h2>
+          <p>Sep 28, 2018<span aria-hidden="true"> · </span>Yelp</p>
+        </div>
+        <span class="source-badge yelp">Yelp</span>
+      </header>
+      <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <p class="review-text">Had a great time getting a cut by Jon. His spot is extremely comfortable and the vibes are right. Definitely check this place out!</p>
+      <footer class="review-footer">
+        <a href="https://www.yelp.com/biz/oliver-club-barber-shop-los-angeles-2?hrid=AkdAk5XowpI4P4RS60HFPg" target="_blank" rel="noopener noreferrer" aria-label="View Henry C.'s review on Yelp">
+          View original on Yelp <span aria-hidden="true">↗</span>
+        </a>
+      </footer>
+    </article>
+
+    <article class="review-card" data-source="yelp" data-index="22">
+      <header class="review-header">
+        <div class="reviewer-mark" aria-hidden="true">DJ</div>
+        <div class="reviewer-details">
+          <h2>Darin J.</h2>
+          <p>Aug 7, 2018<span aria-hidden="true"> · </span>Yelp</p>
+        </div>
+        <span class="source-badge yelp">Yelp</span>
+      </header>
+      <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <p class="review-text">These reviews aren&#039;t joking. Jon did an excellent job with the cut, and the camaraderie is an added bonus. I&#039;m so astounded by the amount of time and attention to detail he put into it. You also get beer!<br><br>Long story short, I&#039;m very satisfied with the cut and style. I&#039;ll definitely be coming back very soon!</p>
+      <footer class="review-footer">
+        <a href="https://www.yelp.com/biz/oliver-club-barber-shop-los-angeles-2?hrid=K5IR9Jt88VWVREcanswrZw" target="_blank" rel="noopener noreferrer" aria-label="View Darin J.'s review on Yelp">
+          View original on Yelp <span aria-hidden="true">↗</span>
+        </a>
+      </footer>
+    </article>
+
+    <article class="review-card" data-source="yelp" data-index="23">
+      <header class="review-header">
+        <div class="reviewer-mark" aria-hidden="true">TS</div>
+        <div class="reviewer-details">
+          <h2>Thom S.</h2>
+          <p>Jun 16, 2018<span aria-hidden="true"> · </span>Yelp</p>
+        </div>
+        <span class="source-badge yelp">Yelp</span>
+      </header>
+      <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <p class="review-text">Jon is what you want in a barber: Patient, detail oriented, consistent. The cut is always better than what you ask for. Come through, kick back have a beer and get a great haircut.</p>
+      <footer class="review-footer">
+        <a href="https://www.yelp.com/biz/oliver-club-barber-shop-los-angeles-2?hrid=drldERYabYba_iYS3LFZGw" target="_blank" rel="noopener noreferrer" aria-label="View Thom S.'s review on Yelp">
+          View original on Yelp <span aria-hidden="true">↗</span>
+        </a>
+      </footer>
+    </article>
+
+    <article class="review-card" data-source="yelp" data-index="24">
+      <header class="review-header">
+        <div class="reviewer-mark" aria-hidden="true">RD</div>
+        <div class="reviewer-details">
+          <h2>Ray D.</h2>
+          <p>Apr 15, 2018<span aria-hidden="true"> · </span>Yelp</p>
+        </div>
+        <span class="source-badge yelp">Yelp</span>
+      </header>
+      <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <p class="review-text">This dude is the best! Really gives the haircut you ask for, listens to everything you have to say, is very detail orientated. The one on one in his shop is amazing. It feels good to get a haircut from a real barber. One of the only ones left. You couldn&#039;t picture a better place to get your haircut. In the loft good music, game is on, cold beer in your hand. Super cool dude all around doing his thing.<br><br>Living in downtown I really have A lot of options when it comes to getting a haircut. After my experience with Jon I feel like I found the best one. I have had my haircut with him twice now and will never go anywhere else.<br><br>If you want a great cut and an old school Conversation with a great dude, come here and let him cut you up. Hot towels, straight razor and a beer. Nothing will make you feel better.<br><br>Thanks for doing what you do. Only place I&#039;ll ever go!</p>
+      <footer class="review-footer">
+        <a href="https://www.yelp.com/biz/oliver-club-barber-shop-los-angeles-2?hrid=Cc6wvgyckDq-_23Z5RoS2A" target="_blank" rel="noopener noreferrer" aria-label="View Ray D.'s review on Yelp">
+          View original on Yelp <span aria-hidden="true">↗</span>
+        </a>
+      </footer>
+    </article>
+
+    <article class="review-card" data-source="yelp" data-index="25">
+      <header class="review-header">
+        <div class="reviewer-mark" aria-hidden="true">AM</div>
+        <div class="reviewer-details">
+          <h2>Andy M.</h2>
+          <p>Apr 13, 2018<span aria-hidden="true"> · </span>Yelp</p>
+        </div>
+        <span class="source-badge yelp">Yelp</span>
+      </header>
+      <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <p class="review-text">Jon is the shit-- booked my appointment on a whim as I&#039;ve been desperately trying to find a good barber since moving back to LA. My search is over!<br><br>Jon works out of his live/work loft and has an awesome set up and the right vibe. He is a dedicated professional and is a king in his craft. He offers hot towel service and pays really close attention to styling and cutting your hair the right way.<br><br>Definitely recommend him. Will be back!</p>
+      <footer class="review-footer">
+        <a href="https://www.yelp.com/biz/oliver-club-barber-shop-los-angeles-2?hrid=vj-4gnGqAZPtK6a_8hVNcw" target="_blank" rel="noopener noreferrer" aria-label="View Andy M.'s review on Yelp">
+          View original on Yelp <span aria-hidden="true">↗</span>
+        </a>
+      </footer>
+    </article>
+
+    <article class="review-card" data-source="yelp" data-index="26">
+      <header class="review-header">
+        <div class="reviewer-mark" aria-hidden="true">GL</div>
+        <div class="reviewer-details">
+          <h2>G L.</h2>
+          <p>Mar 31, 2018<span aria-hidden="true"> · </span>Yelp</p>
+        </div>
+        <span class="source-badge yelp">Yelp</span>
+      </header>
+      <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <p class="review-text">Jon is a great barber that really pays attention to details. His shop is great and he offers beer on tap! I had a nice cut that really worked to incorporate some difficult spots on my hair with things growing every which way. Professional and appreciate his dedication to the craft. Came in for a cut before vacation to Europe and will be back regularly!</p>
+      <footer class="review-footer">
+        <a href="https://www.yelp.com/biz/oliver-club-barber-shop-los-angeles-2?hrid=clsfINIwXP5nuKFuwlGCag" target="_blank" rel="noopener noreferrer" aria-label="View G L.'s review on Yelp">
+          View original on Yelp <span aria-hidden="true">↗</span>
+        </a>
+      </footer>
+    </article>
+
+    <article class="review-card" data-source="yelp" data-index="27">
+      <header class="review-header">
+        <div class="reviewer-mark" aria-hidden="true">LJ</div>
+        <div class="reviewer-details">
+          <h2>Luis Joey M.</h2>
+          <p>Feb 12, 2018<span aria-hidden="true"> · </span>Yelp</p>
+        </div>
+        <span class="source-badge yelp">Yelp</span>
+      </header>
+      <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <p class="review-text">Hip spot, good dude, awesome vibes, and most importantly...<br><br>an awesome haircut! I left feeling like a million bucks. Definitely returning!</p>
+      <footer class="review-footer">
+        <a href="https://www.yelp.com/biz/oliver-club-barber-shop-los-angeles-2?hrid=OS_pPxzsyabhJvMUAWXQgg" target="_blank" rel="noopener noreferrer" aria-label="View Luis Joey M.'s review on Yelp">
+          View original on Yelp <span aria-hidden="true">↗</span>
+        </a>
+      </footer>
+    </article>
+
+    <article class="review-card" data-source="yelp" data-index="28">
+      <header class="review-header">
+        <div class="reviewer-mark" aria-hidden="true">RC</div>
+        <div class="reviewer-details">
+          <h2>Ryan C.</h2>
+          <p>Dec 21, 2017<span aria-hidden="true"> · </span>Yelp</p>
+        </div>
+        <span class="source-badge yelp">Yelp</span>
+      </header>
+      <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <p class="review-text">Jon is great. I work 2 blocks away and was looking for a convenient place to get a good haircut. The overall vibe is great he is easy to talk to, shop is clean, and most importantly he spends time making sure it is cut exactly how you want it. I always walk out feeling like the attention to detail was the same every time. I never feel like he is just trying to get you in and out. I&#039;ve been going to Grit for about 3 months and now there are ~4 other people from my office who go. Definitely has the local barber feel.</p>
+      <footer class="review-footer">
+        <a href="https://www.yelp.com/biz/oliver-club-barber-shop-los-angeles-2?hrid=IU83R1mTDdLSBP15rsuLEQ" target="_blank" rel="noopener noreferrer" aria-label="View Ryan C.'s review on Yelp">
+          View original on Yelp <span aria-hidden="true">↗</span>
+        </a>
+      </footer>
+    </article>
+
+    <article class="review-card" data-source="yelp" data-index="29">
+      <header class="review-header">
+        <div class="reviewer-mark" aria-hidden="true">JR</div>
+        <div class="reviewer-details">
+          <h2>J R.</h2>
+          <p>Dec 20, 2017<span aria-hidden="true"> · </span>Yelp</p>
+        </div>
+        <span class="source-badge yelp">Yelp</span>
+      </header>
+      <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <p class="review-text">If you are reading this review, you are one step closer in experiencing something other than just a haircut. Jon is a well rounded guy and finds commonalities with everyone. He has a persona that makes you feel like you have known him for years. On top of that, he has came a long way in cutting hair. The GRIT has been open for some time now, and it wouldn&#039;t have been this successful if it weren&#039;t for his dedication, ambition, and professionalism as a barber. I have been getting cuts from him for years now, and I have witnessed him cut many different types of hair and hairstyles. He is very detailed with every cut. Whether you are looking for a new hairstyle, or just need to clean up a bit, he is the barber for you.<br>If you&#039;re looking for a new barber, i highly recommend giving Jon the opportunity.</p>
+      <footer class="review-footer">
+        <a href="https://www.yelp.com/biz/oliver-club-barber-shop-los-angeles-2?hrid=gwiT63tQGssgoW62t45gVA" target="_blank" rel="noopener noreferrer" aria-label="View J R.'s review on Yelp">
+          View original on Yelp <span aria-hidden="true">↗</span>
+        </a>
+      </footer>
+    </article>
+
+    <article class="review-card" data-source="yelp" data-index="30">
+      <header class="review-header">
+        <div class="reviewer-mark" aria-hidden="true">CV</div>
+        <div class="reviewer-details">
+          <h2>Chris V.</h2>
+          <p>Nov 9, 2017<span aria-hidden="true"> · </span>Yelp</p>
+        </div>
+        <span class="source-badge yelp">Yelp</span>
+      </header>
+      <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <p class="review-text">Jon is extremely professional,pays attention to detail and performs to perfection everytime.I am thoroughly impressed customer service and overall great guy.</p>
+      <footer class="review-footer">
+        <a href="https://www.yelp.com/biz/oliver-club-barber-shop-los-angeles-2?hrid=EZ6zDv_UQ1krM1lalhGqHQ" target="_blank" rel="noopener noreferrer" aria-label="View Chris V.'s review on Yelp">
+          View original on Yelp <span aria-hidden="true">↗</span>
+        </a>
+      </footer>
+    </article>
+
+    <article class="review-card" data-source="yelp" data-index="31">
+      <header class="review-header">
+        <div class="reviewer-mark" aria-hidden="true">TB</div>
+        <div class="reviewer-details">
+          <h2>Tyler B.</h2>
+          <p>Oct 26, 2017<span aria-hidden="true"> · </span>Yelp</p>
+        </div>
+        <span class="source-badge yelp">Yelp</span>
+      </header>
+      <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <p class="review-text">This place is awesome.<br>I came in here because I needed a new regular place to get my haircut after moving to downtown, and decided to give this place a shot based on the Yelp reviews. I&#039;m very picky about who cuts my hair, and was thrilled I checked this place out.<br>Everything good that people have said is true.<br><br>Jon is awesome, he did a great job cutting my hair, I was completely thrilled with the results. I know it looked good because my buddy who is just as picky about his hair said he would have to come see Jon too.<br><br>The atmosphere was great, super chill, I had a Stone IPA and watched the Dodger game while I got my hair cut. Jon is great too. I&#039;ll be coming back here once a month from here on out.</p>
+      <footer class="review-footer">
+        <a href="https://www.yelp.com/biz/oliver-club-barber-shop-los-angeles-2?hrid=0OdgDAutv4ZZWpO339c2WA" target="_blank" rel="noopener noreferrer" aria-label="View Tyler B.'s review on Yelp">
+          View original on Yelp <span aria-hidden="true">↗</span>
+        </a>
+      </footer>
+    </article>
+
+    <article class="review-card" data-source="yelp" data-index="32">
+      <header class="review-header">
+        <div class="reviewer-mark" aria-hidden="true">MV</div>
+        <div class="reviewer-details">
+          <h2>Martin V.</h2>
+          <p>Sep 28, 2017<span aria-hidden="true"> · </span>Yelp</p>
+        </div>
+        <span class="source-badge yelp">Yelp</span>
+      </header>
+      <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <p class="review-text">Great experience getting a haircut with Jon. Highly recommend his service. Not a dull moment with Jon. He takes his time to make sure your hair is perfect.</p>
+      <footer class="review-footer">
+        <a href="https://www.yelp.com/biz/oliver-club-barber-shop-los-angeles-2?hrid=RmMv2uA5s23lUf_iaP_BaA" target="_blank" rel="noopener noreferrer" aria-label="View Martin V.'s review on Yelp">
+          View original on Yelp <span aria-hidden="true">↗</span>
+        </a>
+      </footer>
+    </article>
+
+    <article class="review-card" data-source="yelp" data-index="33">
+      <header class="review-header">
+        <div class="reviewer-mark" aria-hidden="true">JY</div>
+        <div class="reviewer-details">
+          <h2>Jerry Y.</h2>
+          <p>Sep 27, 2017<span aria-hidden="true"> · </span>Yelp</p>
+        </div>
+        <span class="source-badge yelp">Yelp</span>
+      </header>
+      <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <p class="review-text">Jon is the man. I started going to him a couple months ago and I can&#039;t go anywhere else. He understands the cut that I want, and I always get compliments from people. He&#039;s defintely the barber to go to if you have high standards for your haircut! Thanks Jon!</p>
+      <footer class="review-footer">
+        <a href="https://www.yelp.com/biz/oliver-club-barber-shop-los-angeles-2?hrid=1wwNjLWe11B6ITcb-Sw-NQ" target="_blank" rel="noopener noreferrer" aria-label="View Jerry Y.'s review on Yelp">
+          View original on Yelp <span aria-hidden="true">↗</span>
+        </a>
+      </footer>
+    </article>
+
+    <article class="review-card" data-source="yelp" data-index="34">
+      <header class="review-header">
+        <div class="reviewer-mark" aria-hidden="true">CG</div>
+        <div class="reviewer-details">
+          <h2>Christopher G.</h2>
+          <p>Sep 23, 2017<span aria-hidden="true"> · </span>Yelp</p>
+        </div>
+        <span class="source-badge yelp">Yelp</span>
+      </header>
+      <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <p class="review-text">I highly recommend the services of John, highly talented and dedicated to his craft. Comfortable setting and you get a free beer with every visit (only of has beer in stock) His cuts are A1 and great atmosphere.</p>
+      <footer class="review-footer">
+        <a href="https://www.yelp.com/biz/oliver-club-barber-shop-los-angeles-2?hrid=_7SLTGScRC8n9P5-fOJz5g" target="_blank" rel="noopener noreferrer" aria-label="View Christopher G.'s review on Yelp">
+          View original on Yelp <span aria-hidden="true">↗</span>
+        </a>
+      </footer>
+    </article>
+
+    <article class="review-card" data-source="yelp" data-index="35">
+      <header class="review-header">
+        <div class="reviewer-mark" aria-hidden="true">PH</div>
+        <div class="reviewer-details">
+          <h2>Pascal H.</h2>
+          <p>Sep 13, 2017<span aria-hidden="true"> · </span>Yelp</p>
+        </div>
+        <span class="source-badge yelp">Yelp</span>
+      </header>
+      <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <p class="review-text">I haven&#039;t been that happy with my hair cut for a loooong time. This guy pays attention to the details. It was just perfect for me.</p>
+      <footer class="review-footer">
+        <a href="https://www.yelp.com/biz/oliver-club-barber-shop-los-angeles-2?hrid=sAXuspnD7qGQJh0tzUahLg" target="_blank" rel="noopener noreferrer" aria-label="View Pascal H.'s review on Yelp">
+          View original on Yelp <span aria-hidden="true">↗</span>
+        </a>
+      </footer>
+    </article>
+
+    <article class="review-card" data-source="yelp" data-index="36">
+      <header class="review-header">
+        <div class="reviewer-mark" aria-hidden="true">RW</div>
+        <div class="reviewer-details">
+          <h2>Ryan W.</h2>
+          <p>Sep 1, 2017<span aria-hidden="true"> · </span>Yelp</p>
+        </div>
+        <span class="source-badge yelp">Yelp</span>
+      </header>
+      <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <p class="review-text">Haircut is great. Jon is super cool. There are sports on the TV. There is great beer. It would take convincing to go somewhere else.</p>
+      <footer class="review-footer">
+        <a href="https://www.yelp.com/biz/oliver-club-barber-shop-los-angeles-2?hrid=nSVIINCzq8N4dyrOpKLqZQ" target="_blank" rel="noopener noreferrer" aria-label="View Ryan W.'s review on Yelp">
+          View original on Yelp <span aria-hidden="true">↗</span>
+        </a>
+      </footer>
+    </article>
+
+    <article class="review-card" data-source="yelp" data-index="37">
+      <header class="review-header">
+        <div class="reviewer-mark" aria-hidden="true">PT</div>
+        <div class="reviewer-details">
+          <h2>Paulo T.</h2>
+          <p>Aug 21, 2017<span aria-hidden="true"> · </span>Yelp</p>
+        </div>
+        <span class="source-badge yelp">Yelp</span>
+      </header>
+      <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <p class="review-text">Professional. Great Vibe. Great Cut. Great Guy. An overall Great First Experience at GRIT.<br><br>CHECK JON OUT!</p>
+      <footer class="review-footer">
+        <a href="https://www.yelp.com/biz/oliver-club-barber-shop-los-angeles-2?hrid=beOZetRv7Mz1nQPWxODt5A" target="_blank" rel="noopener noreferrer" aria-label="View Paulo T.'s review on Yelp">
+          View original on Yelp <span aria-hidden="true">↗</span>
+        </a>
+      </footer>
+    </article>
+
+    <article class="review-card" data-source="yelp" data-index="38">
+      <header class="review-header">
+        <div class="reviewer-mark" aria-hidden="true">WW</div>
+        <div class="reviewer-details">
+          <h2>Will W.</h2>
+          <p>Aug 16, 2017<span aria-hidden="true"> · </span>Yelp</p>
+        </div>
+        <span class="source-badge yelp">Yelp</span>
+      </header>
+      <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <p class="review-text">Jon is excellent and so is the atmosphere. The atmosphere is fantastic and I love where it is located, as I had never been to this part of downtown LA before. I&#039;ll be going back to Jon from now on. Great conversation too!</p>
+      <footer class="review-footer">
+        <a href="https://www.yelp.com/biz/oliver-club-barber-shop-los-angeles-2?hrid=UOhtX7W1dSo9vDDfpRmMrQ" target="_blank" rel="noopener noreferrer" aria-label="View Will W.'s review on Yelp">
+          View original on Yelp <span aria-hidden="true">↗</span>
+        </a>
+      </footer>
+    </article>
+
+    <article class="review-card" data-source="yelp" data-index="39">
+      <header class="review-header">
+        <div class="reviewer-mark" aria-hidden="true">NA</div>
+        <div class="reviewer-details">
+          <h2>Nick A.</h2>
+          <p>Aug 10, 2017<span aria-hidden="true"> · </span>Yelp</p>
+        </div>
+        <span class="source-badge yelp">Yelp</span>
+      </header>
+      <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <p class="review-text">Jon has cut my hair for close to two years now, and he&#039;s been on point every time. He&#039;s an amazing barber with incredible attention to detail and his shop is super clean and welcoming. I moved to the Bay Area six months ago and have yet to find someone that has come close to the level and quality of service he provides. I couldn&#039;t recommend it more, go see Jon!</p>
+      <footer class="review-footer">
+        <a href="https://www.yelp.com/biz/oliver-club-barber-shop-los-angeles-2?hrid=t9U4bS5Eb14rdn-O5paCOQ" target="_blank" rel="noopener noreferrer" aria-label="View Nick A.'s review on Yelp">
+          View original on Yelp <span aria-hidden="true">↗</span>
+        </a>
+      </footer>
+    </article>
+
+    <article class="review-card" data-source="yelp" data-index="40">
+      <header class="review-header">
+        <div class="reviewer-mark" aria-hidden="true">JS</div>
+        <div class="reviewer-details">
+          <h2>Jim S.</h2>
+          <p>Aug 3, 2017<span aria-hidden="true"> · </span>Yelp</p>
+        </div>
+        <span class="source-badge yelp">Yelp</span>
+      </header>
+      <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <p class="review-text">Just moved to the area and real glad I found this spot. Not only does Jon hook it up with a clean cut every time but his hospitality is on point as well. I&#039;m definitely going to be a regular.</p>
+      <footer class="review-footer">
+        <a href="https://www.yelp.com/biz/oliver-club-barber-shop-los-angeles-2?hrid=JMb1Z7fzGxI1q4ewSNbL_Q" target="_blank" rel="noopener noreferrer" aria-label="View Jim S.'s review on Yelp">
+          View original on Yelp <span aria-hidden="true">↗</span>
+        </a>
+      </footer>
+    </article>
+
+    <article class="review-card" data-source="yelp" data-index="41">
+      <header class="review-header">
+        <div class="reviewer-mark" aria-hidden="true">FK</div>
+        <div class="reviewer-details">
+          <h2>Frank K.</h2>
+          <p>Jul 12, 2017<span aria-hidden="true"> · </span>Yelp</p>
+        </div>
+        <span class="source-badge yelp">Yelp</span>
+      </header>
+      <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <p class="review-text">I was introduced to Jon by my buddy who would only get his hair cut by him, even when he moved up North to SJ. I never spent more than $10 on a haircut for the past few years but decided that I should invest a bit more in my hairstyle. Gotta impress the ladies right? Getting a nice clean cut from Jon is one of the best decisions I made in a while.<br><br>He&#039;s located in a quiet and hip area of DTLA so you won&#039;t have an issue finding parking. Once you step into his shop, you wouldn&#039;t be shocked that he also lives upstairs because the place is so modern and clean. He&#039;s got a TV and complimentary beer (don&#039;t worry, he won&#039;t cheap out on you with a Rolling Rock) waiting for you while he works his magic but Jon&#039;s an interesting guy himself so have a chat with him. I didn&#039;t ask for a specific style but I definitely wasn&#039;t disappointed with his results!<br><br>As soon as I stepped out to meet friends and family, I was immediately complimented with the haircut. Trust me, the only comments I got with my past $10 cuts were &quot;Oh, you got a haircut.&quot; I also gotta give props to Jon&#039;s super intuitive appointment website. Try him out and give your hair the awesome cut it deserves!</p>
+      <footer class="review-footer">
+        <a href="https://www.yelp.com/biz/oliver-club-barber-shop-los-angeles-2?hrid=CO7yzAZVUwbCVNmD6PwKWA" target="_blank" rel="noopener noreferrer" aria-label="View Frank K.'s review on Yelp">
+          View original on Yelp <span aria-hidden="true">↗</span>
+        </a>
+      </footer>
+    </article>
+
+    <article class="review-card" data-source="yelp" data-index="42">
+      <header class="review-header">
+        <div class="reviewer-mark" aria-hidden="true">AG</div>
+        <div class="reviewer-details">
+          <h2>Anthony G.</h2>
+          <p>Jul 7, 2017<span aria-hidden="true"> · </span>Yelp</p>
+        </div>
+        <span class="source-badge yelp">Yelp</span>
+      </header>
+      <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <p class="review-text">Never left a Yelp review but have to shout out Jon! Best cut &amp; good vibes going to come back for sure!</p>
+      <footer class="review-footer">
+        <a href="https://www.yelp.com/biz/oliver-club-barber-shop-los-angeles-2?hrid=k8wiLpz3q7-O3vomviHs3w" target="_blank" rel="noopener noreferrer" aria-label="View Anthony G.'s review on Yelp">
+          View original on Yelp <span aria-hidden="true">↗</span>
+        </a>
+      </footer>
+    </article>
+
+    <article class="review-card" data-source="yelp" data-index="43">
+      <header class="review-header">
+        <div class="reviewer-mark" aria-hidden="true">JG</div>
+        <div class="reviewer-details">
+          <h2>Jean G.</h2>
+          <p>Jun 27, 2017<span aria-hidden="true"> · </span>Yelp</p>
+        </div>
+        <span class="source-badge yelp">Yelp</span>
+      </header>
+      <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <p class="review-text">Best LA haircut hands down. I&#039;m not good at explaining what I want in my haircut, and Jon delivered on a hairdo cooler than I had imagined. Exactly what I wanted and better. You will not find a better barber.</p>
+      <footer class="review-footer">
+        <a href="https://www.yelp.com/biz/oliver-club-barber-shop-los-angeles-2?hrid=MzovINnX9FAfwBVJIxZZag" target="_blank" rel="noopener noreferrer" aria-label="View Jean G.'s review on Yelp">
+          View original on Yelp <span aria-hidden="true">↗</span>
+        </a>
+      </footer>
+    </article>
+
+    <article class="review-card" data-source="yelp" data-index="44">
+      <header class="review-header">
+        <div class="reviewer-mark" aria-hidden="true">NP</div>
+        <div class="reviewer-details">
+          <h2>Noah P.</h2>
+          <p>Jun 10, 2017<span aria-hidden="true"> · </span>Yelp</p>
+        </div>
+        <span class="source-badge yelp">Yelp</span>
+      </header>
+      <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <p class="review-text">Jon has been my go to barber for the past 5 years. It was truly amazing to see him open his own, very personal barbering experience. He takes the time and patience to really create a one of a kind haircut for his customers. And he does it all from a scissor cut to a straight razor clean up and the scented hot towels! The spot is located in a cool, clean, and friendly space that is easy to find. Jon is the man you want for a cut!</p>
+      <footer class="review-footer">
+        <a href="https://www.yelp.com/biz/oliver-club-barber-shop-los-angeles-2?hrid=teqZ7938EMz-YigEW2Fl8w" target="_blank" rel="noopener noreferrer" aria-label="View Noah P.'s review on Yelp">
+          View original on Yelp <span aria-hidden="true">↗</span>
+        </a>
+      </footer>
+    </article>
+
+    <article class="review-card" data-source="yelp" data-index="45">
+      <header class="review-header">
+        <div class="reviewer-mark" aria-hidden="true">AA</div>
+        <div class="reviewer-details">
+          <h2>Aaron A.</h2>
+          <p>Jun 8, 2017<span aria-hidden="true"> · </span>Yelp</p>
+        </div>
+        <span class="source-badge yelp">Yelp</span>
+      </header>
+      <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <p class="review-text">Jon is an amazing barber. His dedication to his craft is second to none. This barbershop offers the full experience and one-on-one interaction that&#039;s often overlooked by most barbers. If you&#039;re looking for a barber who cares and will give you the cleanest and most quality haircut, Jon is your guy!</p>
+      <footer class="review-footer">
+        <a href="https://www.yelp.com/biz/oliver-club-barber-shop-los-angeles-2?hrid=B2UH85frfG8Iuhutqb6l_w" target="_blank" rel="noopener noreferrer" aria-label="View Aaron A.'s review on Yelp">
+          View original on Yelp <span aria-hidden="true">↗</span>
+        </a>
+      </footer>
+    </article>
+
+    <article class="review-card" data-source="yelp" data-index="46">
+      <header class="review-header">
+        <div class="reviewer-mark" aria-hidden="true">KR</div>
+        <div class="reviewer-details">
+          <h2>Kyle R.</h2>
+          <p>May 15, 2017<span aria-hidden="true"> · </span>Yelp</p>
+        </div>
+        <span class="source-badge yelp">Yelp</span>
+      </header>
+      <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <p class="review-text">This place is one of a kind! An experience like no other barber shop. I&#039;ve been getting a cut from Jon for years now. He finally opened up his own shop and it is def what was expected. Great service, great cut, and the vibe of the studio is amazing. A sort of speak easy feel. You get to just check out from all the stress and go into a quiet spot, enjoy a beer, and let Jon take care of you.<br><br>If you&#039;re looking for a great cut, along with an amazing experience like no other barber shop, then GRIT. is the spot to go to. I&#039;m not going to any other place.</p>
+      <footer class="review-footer">
+        <a href="https://www.yelp.com/biz/oliver-club-barber-shop-los-angeles-2?hrid=wka9VmlxLQ_TrKrkNGDXRA" target="_blank" rel="noopener noreferrer" aria-label="View Kyle R.'s review on Yelp">
+          View original on Yelp <span aria-hidden="true">↗</span>
+        </a>
+      </footer>
+    </article>
+
+    <article class="review-card" data-source="yelp" data-index="47">
+      <header class="review-header">
+        <div class="reviewer-mark" aria-hidden="true">PW</div>
+        <div class="reviewer-details">
+          <h2>Patrick W.</h2>
+          <p>May 15, 2017<span aria-hidden="true"> · </span>Yelp</p>
+        </div>
+        <span class="source-badge yelp">Yelp</span>
+      </header>
+      <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <p class="review-text">Jon has been my barber for a while now and I have not once been displeased with a cut. He knows how to cut all styles and hair types and is willing to go above and beyond to meet your needs. I can&#039;t emphasize enough his attention to detail with every cut. I&#039;m glad that he finally got his own spot up and running. I have never been to a shop that has all the elements of a good cut and a great experience until GRIT.<br><br>This isn&#039;t a typical barbershop that tries to get you in and out and cut as many heads as possible. You&#039;re in it for a great experience as well. Coming here you can expect to be welcomed to ice cold drinks, a good conversation, and a great cut that&#039;s finished off with a hot towel every time.<br><br>The cut, the experience, and the hospitality is all above the rest. You won&#039;t regret checking out GRIT.</p>
+      <footer class="review-footer">
+        <a href="https://www.yelp.com/biz/oliver-club-barber-shop-los-angeles-2?hrid=xWzsZeZ_wBwRXUrfDDyC9A" target="_blank" rel="noopener noreferrer" aria-label="View Patrick W.'s review on Yelp">
+          View original on Yelp <span aria-hidden="true">↗</span>
+        </a>
+      </footer>
+    </article>
+
+    <article class="review-card" data-source="yelp" data-index="48">
+      <header class="review-header">
+        <div class="reviewer-mark" aria-hidden="true">MH</div>
+        <div class="reviewer-details">
+          <h2>Mike H.</h2>
+          <p>May 4, 2017<span aria-hidden="true"> · </span>Yelp</p>
+        </div>
+        <span class="source-badge yelp">Yelp</span>
+      </header>
+      <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <p class="review-text">If you are looking for a great cut, with an amazing barber this is the place to go! Jon&#039;s shop also has a wonderful vibe with great music, sports on the TV - simply a place where you feel comfortable to sit and hang out. Plus the service Jon provides from the detailed cut to the scented hot towels...simply put, i am happy to have found my barber and once you go to Jon I am sure you will feel the same way!</p>
+      <footer class="review-footer">
+        <a href="https://www.yelp.com/biz/oliver-club-barber-shop-los-angeles-2?hrid=M_KatCErpKD-fRcQhyrEfA" target="_blank" rel="noopener noreferrer" aria-label="View Mike H.'s review on Yelp">
+          View original on Yelp <span aria-hidden="true">↗</span>
+        </a>
+      </footer>
+    </article>
+
+    <article class="review-card" data-source="yelp" data-index="49">
+      <header class="review-header">
+        <div class="reviewer-mark" aria-hidden="true">AD</div>
+        <div class="reviewer-details">
+          <h2>AJ D.</h2>
+          <p>May 2, 2017<span aria-hidden="true"> · </span>Yelp</p>
+        </div>
+        <span class="source-badge yelp">Yelp</span>
+      </header>
+      <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <p class="review-text">I&#039;ve been getting cut by Jon for years now and always knows to handle my head. Clean cuts, cool atmosphere, a dope mini personal shop and overall great customer service. Just hit him up, ask for an appointment and he&#039;ll get you fixed up right away.</p>
+      <footer class="review-footer">
+        <a href="https://www.yelp.com/biz/oliver-club-barber-shop-los-angeles-2?hrid=-k0HidG2tj2dcHiWExuzew" target="_blank" rel="noopener noreferrer" aria-label="View AJ D.'s review on Yelp">
+          View original on Yelp <span aria-hidden="true">↗</span>
+        </a>
+      </footer>
+    </article>
+
+    <article class="review-card" data-source="yelp" data-index="50">
+      <header class="review-header">
+        <div class="reviewer-mark" aria-hidden="true">BK</div>
+        <div class="reviewer-details">
+          <h2>Branden K.</h2>
+          <p>May 2, 2017<span aria-hidden="true"> · </span>Yelp</p>
+        </div>
+        <span class="source-badge yelp">Yelp</span>
+      </header>
+      <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <p class="review-text">I&#039;ve been getting a haircut from Jon for years. No other barber can match his skill and finesse. Definitely the best experience and haircut!</p>
+      <footer class="review-footer">
+        <a href="https://www.yelp.com/biz/oliver-club-barber-shop-los-angeles-2?hrid=Eu7v0dq_30c2B57ioQGmoQ" target="_blank" rel="noopener noreferrer" aria-label="View Branden K.'s review on Yelp">
+          View original on Yelp <span aria-hidden="true">↗</span>
+        </a>
+      </footer>
+    </article>
+
+    <article class="review-card" data-source="yelp" data-index="51">
+      <header class="review-header">
+        <div class="reviewer-mark" aria-hidden="true">MS</div>
+        <div class="reviewer-details">
+          <h2>Marcus S.</h2>
+          <p>Apr 29, 2017<span aria-hidden="true"> · </span>Yelp</p>
+        </div>
+        <span class="source-badge yelp">Yelp</span>
+      </header>
+      <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <p class="review-text">No matter what you&#039;re looking for, Jons gotchu. I used live in sf and would come back to get a cut. Extremely accommodating and really appreciates his clientele.</p>
+      <footer class="review-footer">
+        <a href="https://www.yelp.com/biz/oliver-club-barber-shop-los-angeles-2?hrid=ROW4YsGHrS7l5-7FY8Z6Xg" target="_blank" rel="noopener noreferrer" aria-label="View Marcus S.'s review on Yelp">
+          View original on Yelp <span aria-hidden="true">↗</span>
+        </a>
+      </footer>
+    </article>
+
+    <article class="review-card" data-source="yelp" data-index="52">
+      <header class="review-header">
+        <div class="reviewer-mark" aria-hidden="true">AK</div>
+        <div class="reviewer-details">
+          <h2>Alex K.</h2>
+          <p>Apr 27, 2017<span aria-hidden="true"> · </span>Yelp</p>
+        </div>
+        <span class="source-badge yelp">Yelp</span>
+      </header>
+      <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <p class="review-text">I searched for a barber for two years before I found Jon. This dude is second to none. His chic, industrial shop is exclusive - you get 60 minutes of undivided attention. Deep cuts flow from the speaker. Cold beer gets poured into a chilled glass. And Jon gives you the best cut of your life - for an insanely reasonable price. Make an appointment if you can get one - this will be the hottest barbershop in DTLA soon.</p>
+      <footer class="review-footer">
+        <a href="https://www.yelp.com/biz/oliver-club-barber-shop-los-angeles-2?hrid=PLjbjCTg-iLbDCdwIOTiVw" target="_blank" rel="noopener noreferrer" aria-label="View Alex K.'s review on Yelp">
+          View original on Yelp <span aria-hidden="true">↗</span>
+        </a>
+      </footer>
+    </article>
+
+    <article class="review-card" data-source="yelp" data-index="53">
+      <header class="review-header">
+        <div class="reviewer-mark" aria-hidden="true">EC</div>
+        <div class="reviewer-details">
+          <h2>Eric C.</h2>
+          <p>Apr 24, 2017<span aria-hidden="true"> · </span>Yelp</p>
+        </div>
+        <span class="source-badge yelp">Yelp</span>
+      </header>
+      <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <p class="review-text">A good barber is key. A haircut can make or break you...Every cut I&#039;ve gotten, has always been on point. Superior attention to details that result to a clean and crisp cut. Besides the actual haircut, the atmosphere is nice, you walk into a mix of mid century, modern yet industrial vibe. It&#039;s very clean and welcoming. I highly recommend you stopping by.</p>
+      <footer class="review-footer">
+        <a href="https://www.yelp.com/biz/oliver-club-barber-shop-los-angeles-2?hrid=JKNyJQz3G44uJfJgxfRN2A" target="_blank" rel="noopener noreferrer" aria-label="View Eric C.'s review on Yelp">
+          View original on Yelp <span aria-hidden="true">↗</span>
+        </a>
+      </footer>
+    </article>
+
+    <article class="review-card" data-source="google" data-index="54">
+      <header class="review-header">
+        <div class="reviewer-mark" aria-hidden="true">BD</div>
+        <div class="reviewer-details">
+          <h2>Bradley Doucette</h2>
+          <p>8 years ago<span aria-hidden="true"> · </span>Google</p>
+        </div>
+        <span class="source-badge google">Google</span>
+      </header>
+      <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <p class="review-text rating-only">Rating-only review — no written comment was posted.</p>
+      <footer class="review-footer">
+        <a href="https://www.google.com/maps/reviews/data=!4m5!14m4!1m3!1m2!1s117407552394091918234!2s0x80c2c63c968a603d:0x69f5f867769ef245" target="_blank" rel="noopener noreferrer" aria-label="View Bradley Doucette's review on Google">
+          View original on Google <span aria-hidden="true">↗</span>
+        </a>
+      </footer>
+    </article>
+
+    <article class="review-card" data-source="google" data-index="55">
+      <header class="review-header">
+        <div class="reviewer-mark" aria-hidden="true">CG</div>
+        <div class="reviewer-details">
+          <h2>Christopher Garcia</h2>
+          <p>8 years ago<span aria-hidden="true"> · </span>Google</p>
+        </div>
+        <span class="source-badge google">Google</span>
+      </header>
+      <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <p class="review-text">John is a professional and is dedicated to his craft. Looking for a new barber? Look no further!</p>
+      <footer class="review-footer">
+        <a href="https://www.google.com/maps/reviews/data=!4m5!14m4!1m3!1m2!1s115146787558749208141!2s0x80c2c63c968a603d:0x69f5f867769ef245" target="_blank" rel="noopener noreferrer" aria-label="View Christopher Garcia's review on Google">
+          View original on Google <span aria-hidden="true">↗</span>
+        </a>
+      </footer>
+    </article>
+
+    <article class="review-card" data-source="google" data-index="56">
+      <header class="review-header">
+        <div class="reviewer-mark" aria-hidden="true">DR</div>
+        <div class="reviewer-details">
+          <h2>Damian Rivas</h2>
+          <p>7 years ago<span aria-hidden="true"> · </span>Google</p>
+        </div>
+        <span class="source-badge google">Google</span>
+      </header>
+      <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <p class="review-text">Jon is a chill guy and his haircuts are some of the best I&#039;ve ever had!</p>
+      <footer class="review-footer">
+        <a href="https://www.google.com/maps/reviews/data=!4m5!14m4!1m3!1m2!1s101639906147190584349!2s0x80c2c63c968a603d:0x69f5f867769ef245" target="_blank" rel="noopener noreferrer" aria-label="View Damian Rivas's review on Google">
+          View original on Google <span aria-hidden="true">↗</span>
+        </a>
+      </footer>
+    </article>
+
+    <article class="review-card" data-source="google" data-index="57">
+      <header class="review-header">
+        <div class="reviewer-mark" aria-hidden="true">DA</div>
+        <div class="reviewer-details">
+          <h2>David Alf</h2>
+          <p>7 years ago<span aria-hidden="true"> · </span>Google</p>
+        </div>
+        <span class="source-badge google">Google</span>
+      </header>
+      <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <p class="review-text">Clean cuts. Full and friendly service. Local independant business that I can really appreciate!</p>
+      <footer class="review-footer">
+        <a href="https://www.google.com/maps/reviews/data=!4m5!14m4!1m3!1m2!1s110303079746589025959!2s0x80c2c63c968a603d:0x69f5f867769ef245" target="_blank" rel="noopener noreferrer" aria-label="View David Alf's review on Google">
+          View original on Google <span aria-hidden="true">↗</span>
+        </a>
+      </footer>
+    </article>
+
+    <article class="review-card" data-source="google" data-index="58">
+      <header class="review-header">
+        <div class="reviewer-mark" aria-hidden="true">HT</div>
+        <div class="reviewer-details">
+          <h2>Hambik Tankazyan</h2>
+          <p>5 years ago<span aria-hidden="true"> · </span>Google</p>
+        </div>
+        <span class="source-badge google">Google</span>
+      </header>
+      <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <p class="review-text rating-only">Rating-only review — no written comment was posted.</p>
+      <footer class="review-footer">
+        <a href="https://www.google.com/maps/reviews/data=!4m5!14m4!1m3!1m2!1s105471928430949494722!2s0x80c2c63c968a603d:0x69f5f867769ef245" target="_blank" rel="noopener noreferrer" aria-label="View Hambik Tankazyan's review on Google">
+          View original on Google <span aria-hidden="true">↗</span>
+        </a>
+      </footer>
+    </article>
+
+    <article class="review-card" data-source="google" data-index="59">
+      <header class="review-header">
+        <div class="reviewer-mark" aria-hidden="true">IN</div>
+        <div class="reviewer-details">
+          <h2>Iain Nevill</h2>
+          <p>7 years ago<span aria-hidden="true"> · </span>Google</p>
+        </div>
+        <span class="source-badge google">Google</span>
+      </header>
+      <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <p class="review-text">Meticulous. Precise. Knowledgable. The hype is legit. Only wish I’d discovered him earlier.</p>
+      <footer class="review-footer">
+        <a href="https://www.google.com/maps/reviews/data=!4m5!14m4!1m3!1m2!1s114258577035084358790!2s0x80c2c63c968a603d:0x69f5f867769ef245" target="_blank" rel="noopener noreferrer" aria-label="View Iain Nevill's review on Google">
+          View original on Google <span aria-hidden="true">↗</span>
+        </a>
+      </footer>
+    </article>
+
+    <article class="review-card" data-source="google" data-index="60">
+      <header class="review-header">
+        <div class="reviewer-mark" aria-hidden="true">JB</div>
+        <div class="reviewer-details">
+          <h2>Jasper Boykin</h2>
+          <p>8 years ago<span aria-hidden="true"> · </span>Google</p>
+        </div>
+        <span class="source-badge google">Google</span>
+      </header>
+      <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <p class="review-text">Always excellent cut, and the environment is everything</p>
+      <footer class="review-footer">
+        <a href="https://www.google.com/maps/reviews/data=!4m5!14m4!1m3!1m2!1s111132746569606595191!2s0x80c2c63c968a603d:0x69f5f867769ef245" target="_blank" rel="noopener noreferrer" aria-label="View Jasper Boykin's review on Google">
+          View original on Google <span aria-hidden="true">↗</span>
+        </a>
+      </footer>
+    </article>
+
+    <article class="review-card" data-source="google" data-index="61">
+      <header class="review-header">
+        <div class="reviewer-mark" aria-hidden="true">JR</div>
+        <div class="reviewer-details">
+          <h2>Jeffrey Rodriguez</h2>
+          <p>8 years ago<span aria-hidden="true"> · </span>Google</p>
+        </div>
+        <span class="source-badge google">Google</span>
+      </header>
+      <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <p class="review-text">Jon is hands down one of the BEST barbers I’ve ever been too. I went to the same barber for years and when I moved had to find a new one! It’s safe to say I won’t be looking for another barber because Jon is a BEAST with the clippers! His shop is super clean and welcoming</p>
+      <footer class="review-footer">
+        <a href="https://www.google.com/maps/reviews/data=!4m5!14m4!1m3!1m2!1s116177561344694405092!2s0x80c2c63c968a603d:0x69f5f867769ef245" target="_blank" rel="noopener noreferrer" aria-label="View Jeffrey Rodriguez's review on Google">
+          View original on Google <span aria-hidden="true">↗</span>
+        </a>
+      </footer>
+    </article>
+
+    <article class="review-card" data-source="google" data-index="62">
+      <header class="review-header">
+        <div class="reviewer-mark" aria-hidden="true">JC</div>
+        <div class="reviewer-details">
+          <h2>Jesus Cervantes</h2>
+          <p>6 years ago<span aria-hidden="true"> · </span>Google</p>
+        </div>
+        <span class="source-badge google">Google</span>
+      </header>
+      <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <p class="review-text">The best hair cut i ever had</p>
+      <footer class="review-footer">
+        <a href="https://www.google.com/maps/reviews/data=!4m5!14m4!1m3!1m2!1s101965371191006112603!2s0x80c2c63c968a603d:0x69f5f867769ef245" target="_blank" rel="noopener noreferrer" aria-label="View Jesus Cervantes's review on Google">
+          View original on Google <span aria-hidden="true">↗</span>
+        </a>
+      </footer>
+    </article>
+
+    <article class="review-card" data-source="google" data-index="63">
+      <header class="review-header">
+        <div class="reviewer-mark" aria-hidden="true">JC</div>
+        <div class="reviewer-details">
+          <h2>Juan Carlos Aguilar</h2>
+          <p>3 months ago<span aria-hidden="true"> · </span>Google</p>
+        </div>
+        <span class="source-badge google">Google</span>
+      </header>
+      <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <p class="review-text">I’ve been going to The Oliver Club barbershop for many years, and I can honestly say it’s one of the most consistent and reliable places I’ve ever trusted for a haircut. From day one, the attention to detail, professionalism, and overall atmosphere have always stood out.<br><br>The barbers are highly skilled and take the time to understand exactly what you want, whether it’s a classic cut or something more modern. Over the years, they’ve maintained a high standard of quality, which is rare to find. It’s clear they take pride in their work.<br><br>Beyond the haircut itself, the shop has a great ambient, welcoming, clean, and comfortable. It’s the kind of place where you can relax, have a good conversation, and leave feeling confident every time.<br><br>After coming here for many years, I wouldn’t go anywhere else. Highly recommend The Oliver Club to anyone looking for a top-notch barbershop experience.<br>Services<br>Shampoo &amp; conditioning, Groom packages, Scissor cut, Haircut, Beard maintenance</p>
+      <footer class="review-footer">
+        <a href="https://www.google.com/maps/reviews/data=!4m5!14m4!1m3!1m2!1s112597472841727136253!2s0x80c2c63c968a603d:0x69f5f867769ef245" target="_blank" rel="noopener noreferrer" aria-label="View Juan Carlos Aguilar's review on Google">
+          View original on Google <span aria-hidden="true">↗</span>
+        </a>
+      </footer>
+    </article>
+
+    <article class="review-card" data-source="google" data-index="64">
+      <header class="review-header">
+        <div class="reviewer-mark" aria-hidden="true">MG</div>
+        <div class="reviewer-details">
+          <h2>Mario Gentry</h2>
+          <p>4 years ago<span aria-hidden="true"> · </span>Google</p>
+        </div>
+        <span class="source-badge google">Google</span>
+      </header>
+      <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <p class="review-text">My boyfriend and I went because he wanted a haircut. We couldn&#039;t figure out why the offer was smaller than the previous one. We wanted the guy to fall short of our expectations, but he was perfectly trimmed and clean after the service. He lived up to our expectations. Thank you so much for taking the time and making the effort! I would suggest your business.</p>
+      <footer class="review-footer">
+        <a href="https://www.google.com/maps/reviews/data=!4m5!14m4!1m3!1m2!1s108772799744910375212!2s0x80c2c63c968a603d:0x69f5f867769ef245" target="_blank" rel="noopener noreferrer" aria-label="View Mario Gentry's review on Google">
+          View original on Google <span aria-hidden="true">↗</span>
+        </a>
+      </footer>
+    </article>
+
+    <article class="review-card" data-source="google" data-index="65">
+      <header class="review-header">
+        <div class="reviewer-mark" aria-hidden="true">MD</div>
+        <div class="reviewer-details">
+          <h2>matthew dunn</h2>
+          <p>5 years ago<span aria-hidden="true"> · </span>Google</p>
+        </div>
+        <span class="source-badge google">Google</span>
+      </header>
+      <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <p class="review-text">John the coolest. Great cut great service</p>
+      <footer class="review-footer">
+        <a href="https://www.google.com/maps/reviews/data=!4m5!14m4!1m3!1m2!1s100852986017892358691!2s0x80c2c63c968a603d:0x69f5f867769ef245" target="_blank" rel="noopener noreferrer" aria-label="View matthew dunn's review on Google">
+          View original on Google <span aria-hidden="true">↗</span>
+        </a>
+      </footer>
+    </article>
+
+    <article class="review-card" data-source="google" data-index="66">
+      <header class="review-header">
+        <div class="reviewer-mark" aria-hidden="true">MK</div>
+        <div class="reviewer-details">
+          <h2>Matthew Kwon</h2>
+          <p>8 years ago<span aria-hidden="true"> · </span>Google</p>
+        </div>
+        <span class="source-badge google">Google</span>
+      </header>
+      <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <p class="review-text rating-only">Rating-only review — no written comment was posted.</p>
+      <footer class="review-footer">
+        <a href="https://www.google.com/maps/reviews/data=!4m5!14m4!1m3!1m2!1s116267280753878041079!2s0x80c2c63c968a603d:0x69f5f867769ef245" target="_blank" rel="noopener noreferrer" aria-label="View Matthew Kwon's review on Google">
+          View original on Google <span aria-hidden="true">↗</span>
+        </a>
+      </footer>
+    </article>
+
+    <article class="review-card" data-source="google" data-index="67">
+      <header class="review-header">
+        <div class="reviewer-mark" aria-hidden="true">MM</div>
+        <div class="reviewer-details">
+          <h2>Mr.Mushun McDowell</h2>
+          <p>4 years ago<span aria-hidden="true"> · </span>Google</p>
+        </div>
+        <span class="source-badge google">Google</span>
+      </header>
+      <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <p class="review-text">Great</p>
+      <footer class="review-footer">
+        <a href="https://www.google.com/maps/reviews/data=!4m5!14m4!1m3!1m2!1s103717080432639203817!2s0x80c2c63c968a603d:0x69f5f867769ef245" target="_blank" rel="noopener noreferrer" aria-label="View Mr.Mushun McDowell's review on Google">
+          View original on Google <span aria-hidden="true">↗</span>
+        </a>
+      </footer>
+    </article>
+
+    <article class="review-card" data-source="google" data-index="68">
+      <header class="review-header">
+        <div class="reviewer-mark" aria-hidden="true">RS</div>
+        <div class="reviewer-details">
+          <h2>Robie Seeburger</h2>
+          <p>8 years ago<span aria-hidden="true"> · </span>Google</p>
+        </div>
+        <span class="source-badge google">Google</span>
+      </header>
+      <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <p class="review-text">Jon is the man and is extremely personable. He also knows how to give a great cut.</p>
+      <footer class="review-footer">
+        <a href="https://www.google.com/maps/reviews/data=!4m5!14m4!1m3!1m2!1s103105759392938769354!2s0x80c2c63c968a603d:0x69f5f867769ef245" target="_blank" rel="noopener noreferrer" aria-label="View Robie Seeburger's review on Google">
+          View original on Google <span aria-hidden="true">↗</span>
+        </a>
+      </footer>
+    </article>
+
+    <article class="review-card" data-source="google" data-index="69">
+      <header class="review-header">
+        <div class="reviewer-mark" aria-hidden="true">SB</div>
+        <div class="reviewer-details">
+          <h2>Sammy Be</h2>
+          <p>a year ago<span aria-hidden="true"> · </span>Google</p>
+        </div>
+        <span class="source-badge google">Google</span>
+      </header>
+      <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <p class="review-text">I often cut my own hair so I haven&#039;t gone to a barber shop for a while.<br>Tonight, I decided to go with a pro and booked an appointment with Grayson. He was wonderful. Professional and efficient but in a very friendly, easy going way. He took his time to understand what I wanted from the cut and the texture of my hair and was fun to chat with. I left with a solid haircut that I&#039;m extremely happy with at a very reasonable price for the neighborhood and quality of experience.<br>Also want to mention that I actually got a couple of haircuts from Jon many years ago in the old location. It was also a great experience. So you really can&#039;t go wrong with this place.<br>Services<br>Haircut</p>
+      <footer class="review-footer">
+        <a href="https://www.google.com/maps/reviews/data=!4m5!14m4!1m3!1m2!1s112391467873850839066!2s0x80c2c63c968a603d:0x69f5f867769ef245" target="_blank" rel="noopener noreferrer" aria-label="View Sammy Be's review on Google">
+          View original on Google <span aria-hidden="true">↗</span>
+        </a>
+      </footer>
+    </article>
+
+    <article class="review-card" data-source="google" data-index="70">
+      <header class="review-header">
+        <div class="reviewer-mark" aria-hidden="true">SA</div>
+        <div class="reviewer-details">
+          <h2>Sean Agnew</h2>
+          <p>8 years ago<span aria-hidden="true"> · </span>Google</p>
+        </div>
+        <span class="source-badge google">Google</span>
+      </header>
+      <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <p class="review-text rating-only">Rating-only review — no written comment was posted.</p>
+      <footer class="review-footer">
+        <a href="https://www.google.com/maps/reviews/data=!4m5!14m4!1m3!1m2!1s111724121507539209318!2s0x80c2c63c968a603d:0x69f5f867769ef245" target="_blank" rel="noopener noreferrer" aria-label="View Sean Agnew's review on Google">
+          View original on Google <span aria-hidden="true">↗</span>
+        </a>
+      </footer>
+    </article>
+
+    <article class="review-card" data-source="google" data-index="71">
+      <header class="review-header">
+        <div class="reviewer-mark" aria-hidden="true">TD</div>
+        <div class="reviewer-details">
+          <h2>Thomas Dudro</h2>
+          <p>6 years ago<span aria-hidden="true"> · </span>Google</p>
+        </div>
+        <span class="source-badge google">Google</span>
+      </header>
+      <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <p class="review-text rating-only">Rating-only review — no written comment was posted.</p>
+      <footer class="review-footer">
+        <a href="https://www.google.com/maps/reviews/data=!4m5!14m4!1m3!1m2!1s103781350050838307271!2s0x80c2c63c968a603d:0x69f5f867769ef245" target="_blank" rel="noopener noreferrer" aria-label="View Thomas Dudro's review on Google">
+          View original on Google <span aria-hidden="true">↗</span>
+        </a>
+      </footer>
+    </article>
+
+    <article class="review-card" data-source="google" data-index="72">
+      <header class="review-header">
+        <div class="reviewer-mark" aria-hidden="true">TD</div>
+        <div class="reviewer-details">
+          <h2>Tristan de Liège</h2>
+          <p>8 years ago<span aria-hidden="true"> · </span>Google</p>
+        </div>
+        <span class="source-badge google">Google</span>
+      </header>
+      <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <p class="review-text">Super chill dude, very professional and helped me get the exact haircut I wanted. Highly recommend.</p>
+      <footer class="review-footer">
+        <a href="https://www.google.com/maps/reviews/data=!4m5!14m4!1m3!1m2!1s117528510390940259705!2s0x80c2c63c968a603d:0x69f5f867769ef245" target="_blank" rel="noopener noreferrer" aria-label="View Tristan de Liège's review on Google">
+          View original on Google <span aria-hidden="true">↗</span>
+        </a>
+      </footer>
+    </article>
+    </section>
+    <div id="empty-state" class="empty-state">No reviews match that search.</div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p>Reviews are reproduced from publicly visible posts and attributed to their original source. Reviewer names and wording are shown as publicly posted. Google and Yelp are trademarks of their respective owners. Review availability and platform content may change.</p>
+      <p><a href="#reviews">Back to reviews ↑</a></p>
+    </div>
+  </footer>
+
+  <script>
+    (() => {
+      const cards = [...document.querySelectorAll('.review-card')];
+      const buttons = [...document.querySelectorAll('.filter-button')];
+      const search = document.querySelector('#review-search');
+      const count = document.querySelector('#result-count');
+      const empty = document.querySelector('#empty-state');
+      let activeFilter = 'all';
+
+      const update = () => {
+        const query = search.value.trim().toLocaleLowerCase();
+        let visible = 0;
+
+        for (const card of cards) {
+          const matchesSource = activeFilter === 'all' || card.dataset.source === activeFilter;
+          const matchesSearch = !query || card.textContent.toLocaleLowerCase().includes(query);
+          const show = matchesSource && matchesSearch;
+          card.hidden = !show;
+          if (show) visible += 1;
+        }
+
+        count.textContent = visible === 1 ? '1 review' : visible + ' reviews';
+        empty.classList.toggle('visible', visible === 0);
+      };
+
+      for (const button of buttons) {
+        button.addEventListener('click', () => {
+          activeFilter = button.dataset.filter;
+          for (const item of buttons) item.setAttribute('aria-pressed', String(item === button));
+          update();
+        });
+      }
+
+      search.addEventListener('input', update);
+    })();
+  </script>
+</body>
+</html>
